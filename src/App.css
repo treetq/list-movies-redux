@@ -39,6 +39,7 @@ button {
 }
 
 .myinputs button {
+  cursor: pointer;
   width: 100px;
   color: white;
   background-color: #ada9a9;

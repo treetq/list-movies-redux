@@ -15,17 +15,24 @@ const Insertion = (props) => {
         <input
           type="text"
           value={name}
+          placeholder="The Movie name"
           onChange={(e) => setName(e.target.value)}
+          required
         />
         <input
           type="text"
           value={poster}
+          placeholder="The Movie url"
           onChange={(e) => setPoster(e.target.value)}
+          required
         />
         <button
+          disabled={!(name && poster)}
           onClick={(e) => {
             e.preventDefault();
             dispatch(addMovie({ name, poster }));
+            setName("");
+            setPoster("");
           }}
         >
           Add
