@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMovie } from "../slices/movieSlice";
 const Insertion = (props) => {
-  const movies = useSelector((state) => {
-    state.movies;
-  });
+  // const movies = useSelector((state) => {
+  //   state.movies;
+  // });
 
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
@@ -30,7 +30,7 @@ const Insertion = (props) => {
           disabled={!(name && poster)}
           onClick={(e) => {
             e.preventDefault();
-            dispatch(addMovie({ name, poster }));
+            dispatch(addMovie({ title: name, backdrop_path: poster }));
             setName("");
             setPoster("");
           }}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMovies, getAllMovies } from "../slices/movieSlice";
 import Movie from "./Movie";
@@ -7,32 +7,27 @@ const Movies = (props) => {
   const movies = useSelector(getAllMovies);
   const dispatch = useDispatch();
 
+  const url =
+    "https://api.themoviedb.org/3/movie/popular?api_key=d4c40411935d66fcdef9eb6718039e2e&language=en-US&page=1";
   useEffect(() => {
-    dispatch(
-      addMovies([
-        {
-          name: "Cocaine Bear",
-          poster:
-            "https://img.yts.mx/assets/images/movies/cocaine_bear_2023/medium-cover.jpg",
-        },
-        {
-          name: "A Man Called Otto",
-          poster:
-            "https://img.yts.mx/assets/images/movies/a_man_called_otto_2022/medium-cover.jpg",
-        },
-        {
-          name: "The Nomad",
-          poster:
-            "https://img.yts.mx/assets/images/movies/the_nomad_2023/medium-cover.jpg",
-        },
-      ])
-    );
+    fetchPopular();
   }, []);
+  const fetchPopular = async () => {
+    const response = await fetch(url)
+      .then((response) => response.json())
+      .catch((error) => console.error(error));
+
+    dispatch(addMovies([...response.results]));
+  };
+
+  // useEffect(() => {
+  //   dispatch(addMovies([...moves.results]));
+  // }, []);
 
   return (
     <div className={props.className}>
-      {movies.map((value, index) => {
-        return <Movie className="movie" key={index} data={value} />;
+      {movies.map((movie, index) => {
+        return <Movie className="movie" key={index} movie={movie} />;
       })}
     </div>
   );
