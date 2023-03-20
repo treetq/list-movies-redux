@@ -80,3 +80,27 @@ button {
   font-size: 1.2rem;
   font-weight: 600;
 }
+
+@media screen and (max-width: 600px) {
+  .myinputs form {
+    flex-direction: column;
+  }
+  .myinputs input,
+  button {
+    width: 90%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .myinputs button {
+    width: 50px;
+  }
+
+  .grid {
+    margin: auto;
+    max-width: 580px;
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+  }
+}
